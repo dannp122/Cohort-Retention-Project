@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Name - Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Hi, I'm Your Name</h1>
+    <p>Welcome to my portfolio!</p>
+  </header>
+  <section>
+    <h2>About Me</h2>
+    <p>This is where you can write a little bit about yourself, your skills, and experiences.</p>
+  </section>
+  <section>
+    <h2>Projects</h2>
+    <ul>
+      <li><a href="https://github.com/your-username/project1">Project 1</a></li>
+      <li><a href="https://github.com/your-username/project2">Project 2</a></li>
+      <li><a href="https://github.com/your-username/project3">Project 3</a></li>
+    </ul>
+  </section>
+  <footer>
+    <p>Find me on <a href="https://github.com/your-username">GitHub</a> | <a href="https://www.linkedin.com/in/your-name">LinkedIn</a></p>
+  </footer>
+</body>
+</html>
