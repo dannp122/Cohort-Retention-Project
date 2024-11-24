@@ -1,0 +1,73 @@
+﻿use Cohort
+go
+
+WITH transaction_data AS 
+(
+	SELECT	  
+			db.customer_id,
+			db.date_created,
+			DATEADD(DAY, 1, EOMONTH(date_created, -1)) AS transaction_month,
+			db.transaction_id,
+			db.revenue 
+	FROM dbo.proper_cohort_data as db
+	WHERE db.transaction_status != 'Refunded'
+		AND db.transaction_sale_type = 'sale'
+		and db.date_created  BETWEEN '2023-01-01' AND CAST(GETDATE() AS DATE)
+)
+, pre AS (
+    SELECT transaction_data.transaction_month AS cohort_month , 
+            transaction_data.customer_id
+    FROM transaction_data
+    GROUP BY transaction_data.transaction_month , 
+            transaction_data.customer_id
+)
+, population_ AS 
+(
+    SELECT pre.cohort_month, 
+            COUNT(DISTINCT pre.customer_id) AS cohort_population
+    FROM pre 
+    GROUP BY pre.cohort_month
+)
+, mart_ AS (
+    SELECT
+    transaction_data.customer_id,
+    population_.cohort_month, 
+    transaction_data.date_created, 
+    DATEDIFF(
+        MONTH, 
+        pre.cohort_month, 
+        DATEADD(MONTH, DATEDIFF(MONTH, 0, transaction_data.date_created), 0)   
+    ) AS month_number,
+    population_.cohort_population
+FROM
+    transaction_data
+    JOIN pre ON transaction_data.customer_id = pre.customer_id
+    JOIN population_ ON population_.cohort_month = pre.cohort_month
+WHERE 
+    transaction_data.date_created >= population_.cohort_month 
+    AND DATEADD(MONTH, DATEDIFF(MONTH, 0, population_.cohort_month), 0) >= DATEADD(MONTH, -36, DATEADD(MONTH, DATEDIFF(MONTH, 0, GETDATE()), 0))   
+)
+,final_ AS (
+    SELECT
+        mart_.cohort_month,
+        mart_.month_number,
+        CAST(MAX(mart_.cohort_population) AS float) AS cohort_population,
+        CAST(COUNT(DISTINCT mart_.customer_id) AS float) AS cohort_retention_number 
+    FROM
+        mart_
+    GROUP BY
+        mart_.cohort_month,
+        mart_.month_number  
+)
+SELECT
+    final_.cohort_month,
+    final_.month_number,
+    final_.cohort_retention_number,
+    final_.cohort_population,
+    CAST(
+        (
+            final_.cohort_retention_number / final_.cohort_population
+        ) AS DECIMAL(7, 3)
+    ) AS cohort_retention_rate 
+FROM
+    final_ 
