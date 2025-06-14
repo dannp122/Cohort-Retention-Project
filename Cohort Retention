@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cohort Retention Analysis</title>
+</head>
+<body>
+  <h1>Chào mừng đến với Dự án Phân tích Cohort</h1>
+  <p>Báo cáo phân tích hành vi giữ chân khách hàng qua các tháng.</p>
+  <p><a href="Cohort_Retention.pdf" target="_blank">Tải báo cáo PDF tại đây</a></p>
+  <p><a href="https://github.com/dannp122/Phuong-Dan">Xem toàn bộ mã nguồn trên GitHub</a></p>
+</body>
+</html>
