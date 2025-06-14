@@ -1,12 +1,39 @@
 <!DOCTYPE html>
-<html>
+<html lang="vi">
 <head>
+  <meta charset="UTF-8">
   <title>Cohort Retention Analysis</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f6f8;
+      color: #333;
+      text-align: center;
+      padding: 50px;
+    }
+    h1 {
+      color: #2c3e50;
+    }
+    a {
+      display: inline-block;
+      margin: 10px;
+      color: #007acc;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    p {
+      font-size: 18px;
+      margin: 10px 0;
+    }
+  </style>
 </head>
 <body>
-  <h1>Chào mừng đến với Dự án Phân tích Cohort</h1>
-  <p>Báo cáo phân tích hành vi giữ chân khách hàng qua các tháng.</p>
-  <p><a href="Cohort_Retention.pdf" target="_blank">Tải báo cáo PDF tại đây</a></p>
-  <p><a href="https://github.com/dannp122/Phuong-Dan">Xem toàn bộ mã nguồn trên GitHub</a></p>
+  <h1>📊 Dự án Phân tích Cohort</h1>
+  <p>Phân tích hành vi giữ chân khách hàng qua các tháng, giúp đưa ra quyết định chiến lược.</p>
+  <p><a href="Cohort_Retention.pdf" target="_blank">📥 Tải báo cáo PDF</a></p>
+  <p><a href="https://github.com/dannp122/Phuong-Dan" target="_blank">🔗 Xem mã nguồn trên GitHub</a></p>
 </body>
 </html>
